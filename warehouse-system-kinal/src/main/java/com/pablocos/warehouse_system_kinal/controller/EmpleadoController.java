@@ -23,7 +23,7 @@ public class EmpleadoController {
     }
 
     @PutMapping("/{codigo}")
-    public ResponseEntity<Empleado> actualizar(@PathVariable String codEmpleado, @RequestBody Empleado empleado){
+    public ResponseEntity<Empleado> actualizar(@PathVariable("codigo")String codEmpleado, @RequestBody Empleado empleado){
         if (!rep.existsById(codEmpleado)){
             return ResponseEntity.notFound().build();
         }
@@ -36,6 +36,15 @@ public class EmpleadoController {
         return rep.findById(codigo)
                 .map(Empleado-> ResponseEntity.ok(Empleado))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> eliminar(@PathVariable String codigo){
+        if (!rep.existsById(codigo)){
+            return ResponseEntity.notFound().build();
+        }
+        rep.deleteById(codigo);
+        return ResponseEntity.noContent().build();
     }
 
 }

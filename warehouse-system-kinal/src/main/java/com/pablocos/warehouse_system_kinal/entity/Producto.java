@@ -1,72 +1,43 @@
 package com.pablocos.warehouse_system_kinal.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "productos")
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Long idProducto;
-
-    @Column
-    private String codigoProducto;
 
     @Column
     private String nombre;
 
     @Column
-    private String descripcion;
-
-    @Column
-    private String unidadMedida;
-
-    @Column
-    private BigDecimal stockActual;
-
-    @Column
-    private BigDecimal stockMinimo;
+    private String codigoProducto;
 
     @Column
     private BigDecimal costoUnitario;
 
-    @Column
-    private String tipo;
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty("idProveedor")
+    private Proveedor proveedor;
 
-    @Column
-    private String estado;
+    public Producto() {}
 
-    @Column
-    private String observaciones;
-
-    @Column
-    private LocalDateTime fechaCreacion;
-
-    @Column
-    private LocalDateTime fechaActualizacion;
-
-    public Producto() {
-
-    }
-
-    public Producto(Long idProducto, String codigoProducto, String nombre, String descripcion, String unidadMedida, BigDecimal stockActual, BigDecimal costoUnitario, BigDecimal stockMinimo, String tipo, String estado, String observaciones, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
+    public Producto(Long idProducto, String nombre, String codigoProducto,
+                    BigDecimal costoUnitario, Proveedor proveedor) {
         this.idProducto = idProducto;
-        this.codigoProducto = codigoProducto;
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.unidadMedida = unidadMedida;
-        this.stockActual = stockActual;
+        this.codigoProducto = codigoProducto;
         this.costoUnitario = costoUnitario;
-        this.stockMinimo = stockMinimo;
-        this.tipo = tipo;
-        this.estado = estado;
-        this.observaciones = observaciones;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaActualizacion = fechaActualizacion;
+        this.proveedor = proveedor;
     }
 
     public Long getIdProducto() {
@@ -77,14 +48,6 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public String getCodigoProducto() {
-        return codigoProducto;
-    }
-
-    public void setCodigoProducto(String codigoProducto) {
-        this.codigoProducto = codigoProducto;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -93,36 +56,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getCodigoProducto() {
+        return codigoProducto;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getUnidadMedida() {
-        return unidadMedida;
-    }
-
-    public void setUnidadMedida(String unidadMedida) {
-        this.unidadMedida = unidadMedida;
-    }
-
-    public BigDecimal getStockActual() {
-        return stockActual;
-    }
-
-    public void setStockActual(BigDecimal stockActual) {
-        this.stockActual = stockActual;
-    }
-
-    public BigDecimal getStockMinimo() {
-        return stockMinimo;
-    }
-
-    public void setStockMinimo(BigDecimal stockMinimo) {
-        this.stockMinimo = stockMinimo;
+    public void setCodigoProducto(String codigoProducto) {
+        this.codigoProducto = codigoProducto;
     }
 
     public BigDecimal getCostoUnitario() {
@@ -133,43 +72,11 @@ public class Producto {
         this.costoUnitario = costoUnitario;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public LocalDateTime getFechaActualizacion() {
-        return fechaActualizacion;
-    }
-
-    public void setFechaActualizacion(LocalDateTime fechaActualizacion) {
-        this.fechaActualizacion = fechaActualizacion;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 }

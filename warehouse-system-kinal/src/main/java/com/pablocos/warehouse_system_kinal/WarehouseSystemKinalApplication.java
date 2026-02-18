@@ -8,6 +8,8 @@ public class WarehouseSystemKinalApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WarehouseSystemKinalApplication.class, args);
-    }
+
+	}
+
 
 }

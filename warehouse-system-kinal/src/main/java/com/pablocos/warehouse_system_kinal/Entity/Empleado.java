@@ -1,23 +1,29 @@
 package com.pablocos.warehouse_system_kinal.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
-@Table(name= "Empleados")
+@Table(name = "Empleados")
 public class Empleado {
+
     @Id
-    private String codempleado;
     @Column(name = "cod_empleado")
+    private String codempleado;
+
+    @Column
     private String nombreEmpleado;
+
     @Column
     private String apellidoEmpleado;
+
     @Column
     private String telefono;
+
     @Column
     private String correo;
+
     @Column
     private int estado;
 
